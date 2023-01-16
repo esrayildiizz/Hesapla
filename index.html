@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      .toplam{
+        display:none;
+     } 
+     .geriDön{
+        display:none;
+     }
+     .tutarhesapla{
+        margin-top: 250px;
+        border: 5px outset #4CAF50;
+        background-color: beige;
+        text-align: center;
+        width: 1500px;
+        height: 355px;
+     }
+     .tutar{
+      margin-top: 30px;
+     }
+     .toplam {
+        margin-top: 30px;
+     }
+     .button1 {
+      background-color: white;
+      color: black;
+      border: 2px solid #4CAF50;
+     }
+     .button1:hover {
+      background-color: #4CAF50;
+      color: white;
+      }
+      .button2 {
+      background-color: white;
+      color: black;
+      border: 2px solid #4CAF50;
+     }
+     .button2:hover {
+      background-color: #4CAF50;
+      color: white;
+      }
+    </style>
+    <title>Tutar Hesapla</title>
+</head>
+<body>
+    <div class="tutarhesapla" >
+        <div class="tutar">
+            Ürün Adı: <input type="text" id="adlabel" placeholder="Ürün Adı Giriniz" name="fav_language">
+            Birim Adet: <input type="text" id="adetlabel" placeholder="Birim Adet Giriniz" name="fav_language">
+            Birim Fiyat: <input type="text" id="fiyatlabel" placeholder="Birim Fiyat Giriniz" name="fav_language" >
+            KDV % = <input type="text" id="kdvlabel" placeholder="Kdv Oranı Giriniz" name="fav_language" >
+            İndirim (%) = <input type="text" id="indirimlabel" placeholder="İndirim Oranı Giriniz" name="fav_language" >
+            <br>
+        </div>
+        <div class="buttonHesapla" id="buttonId"> 
+            <br>
+            <button class="button1" type="button" id="hesapla">Hesapla</button>
+        </div>
+        <hr>
+        <div class="toplam" id="toplamtutar">
+        <div id="kdvtutarDiv">Toplam KDV Tutarı: </div>
+        <input type="text" id="kdvtutarlabel" name="fav_language" readonly>
+        <hr>
+        <div id="tutarDiv"> Toplam Tutar: </div>
+        <input type="text" id="tutarlabel" name="fav_language"  readonly>
+        <hr>
+        <div id="indirimtutarDiv">Toplam İndirim Tutarı: </div>
+        <input type="text" id="indirimtutarlabel" name="fav_language"readonly>
+        <hr>
+        </div>
+        <div class="geriDön" id="geriDönId"> 
+        <br>
+        <button class="button2" type="buttonGeri" id="hesaplaGeri">Geri Dön</button>
+        </div>
+    </div> 
+    <script>  
+     const btn = document.getElementById("hesapla");
+        btn.addEventListener("click", () => {
+            var adetLabelResult=(!(document.getElementById("adetlabel").value == " ")) && (!(document.getElementById("adetlabel").value == "")) 
+            && !(Number(document.getElementById("adetlabel").value ) < 0);
+
+            var fiyatLabelResult=(!(document.getElementById("fiyatlabel").value == " ")) && (!(document.getElementById("fiyatlabel").value == "")) 
+            && !(Number(document.getElementById("fiyatlabel").value ) < 0);
+            
+            var kdvLabelResult=(!(document.getElementById("kdvlabel").value == " ")) && (!(document.getElementById("kdvlabel").value == "")) 
+            && !(Number(document.getElementById("kdvlabel").value ) < 0);
+
+            var indirimLabelResult=(!(document.getElementById("indirimlabel").value == " ")) && (!(document.getElementById("indirimlabel").value == "")) 
+            && !(Number(document.getElementById("indirimlabel").value ) < 0);
+
+            var adLabelResult=(!(document.getElementById("adlabel").value == " ")) && (!(document.getElementById("adlabel").value == "")) 
+            && !(Number(document.getElementById("adlabel").value ) < 0);
+            // if koşulunda boş değer , 0 dan küçük değer ve 1 adet space tuşu için kontrol
+            if(adetLabelResult && fiyatLabelResult && kdvLabelResult && indirimLabelResult  && adLabelResult)
+            {
+                document.getElementById("kdvtutarlabel").value=(Number(document.getElementById("adetlabel").value) * Number(document.getElementById("fiyatlabel").value)) * (Number(document.getElementById("kdvlabel").value)/100);
+                document.getElementById("tutarlabel").value=((Number(document.getElementById("adetlabel").value) * Number(document.getElementById("fiyatlabel").value))) + (Number(document.getElementById("kdvtutarlabel").value));
+                document.getElementById("indirimtutarlabel").value=(Number(document.getElementById("tutarlabel").value) - (Number(document.getElementById("tutarlabel").value) * (Number( document.getElementById("indirimlabel").value)/100)));
+                const box = document.getElementById("toplamtutar");
+                const box2 = document.getElementById("buttonId");
+                const box3 = document.getElementById("geriDönId");
+                toplamtutar.style.display = "block";
+                buttonId.style.display="none";
+                geriDönId.style.display="block";
+            }
+            else
+            {
+                alert("Lütfen Doğru Girdiğiniz Değerleri Kontrol Edin...");
+            }   
+    });
+    const btn2 = document.getElementById("hesaplaGeri");
+      btn2.addEventListener("click", () => {
+        document.getElementById("adlabel").value="";
+        document.getElementById("adetlabel").value="";
+        document.getElementById("fiyatlabel").value="";
+        document.getElementById("kdvlabel").value="";
+        document.getElementById("indirimlabel").value="";
+      const box = document.getElementById("toplamtutar");
+      const box2 = document.getElementById("buttonId");
+      const box3 = document.getElementById("geriDönId");
+      toplamtutar.style.display = "none";
+      buttonId.style.display="block";
+      geriDönId.style.display="none";
+    });
+    </script>
+</body>
+</html>
