@@ -44,7 +44,7 @@
       color: white;
       }
     </style>
-    <title>Tutar Hesapla</title>
+    <title>Calculate Amount</title>
 </head>
 <body>
     <div class="tutarhesapla" >
@@ -94,6 +94,15 @@
 
             var adLabelResult=(!(document.getElementById("adlabel").value == " ")) && (!(document.getElementById("adlabel").value == "")) 
             && !(Number(document.getElementById("adlabel").value ) < 0);
+
+            var kdvTutarRes=document.getElementById("kdvtutarlabel").value;
+            var adetRes=document.getElementById("adetlabel").value;
+            var fiyatRes=document.getElementById("fiyatlabel").value;
+            var kdvRes=document.getElementById("kdvlabel").value;
+            var indirimRes= document.getElementById("indirimlabel").value;
+            var tutarRes= document.getElementById("tutarlabel").value;
+            var indirimTutarRes=document.getElementById("indirimtutarlabel").value;
+
             // if koşulunda boş değer , 0 dan küçük değer ve 1 adet space tuşu için kontrol
             if(adetLabelResult && fiyatLabelResult && kdvLabelResult && indirimLabelResult  && adLabelResult)
             {
